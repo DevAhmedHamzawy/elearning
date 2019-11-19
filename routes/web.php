@@ -20,6 +20,13 @@ Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm');
 Route::post('admin/login', 'Auth\AdminLoginController@login')->name('admin.login');
 Route::post('admin/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
+Route::group(['prefix' => '/admin','middleware' => 'assign.guard:admin,admin/login'],function(){
+
+    Route::get('dashboard', 'AdminPanelController@dashboard');
+    Route::resource('categories', 'CategoryController');
+
+
+});
 
 Auth::routes();
 
