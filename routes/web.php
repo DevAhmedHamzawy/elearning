@@ -24,6 +24,7 @@ Route::group(['prefix' => '/admin','middleware' => 'assign.guard:admin,admin/log
 
     Route::get('dashboard', 'AdminPanelController@dashboard');
     Route::resource('categories', 'CategoryController');
+    Route::resource('categories/{category}/subcategories', 'SubcategoryController');
 
 
 });

@@ -6,8 +6,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Dashboard
-                    <a href="{{ route('categories.create') }}" class="btn btn-primary" style="float:right">Create Category</a>
+                    {{ $category->name }} 
+                    <a href="{{ route('subcategories.create', $category->slug) }}" class="btn btn-primary" style="float:right">Create Subcategory</a>
                 </div>
 
                 <div class="card-body">
@@ -18,13 +18,13 @@
                     @endif
 
                     <ul class="list-group">
-                        @forelse ($categories as $category)
+                        @forelse ($subcategories as $subcategory)
                             <li class="list-group-item">
-                                {{ $category->name }}
-                                
-                                <a href="{{ route('subcategories.index', $category->slug) }}" class="btn btn-primary">Show</a>
-                                <a href="{{ route('categories.edit', $category->slug) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('categories.destroy', $category->slug) }}" method="post">
+                                {{ $subcategory->name }}
+
+                                <a href="{{ route('subcategories.show', [$category->slug, $subcategory->slug]) }}" class="btn btn-primary">Show</a>
+                                <a href="{{ route('subcategories.edit', [$category->slug, $subcategory->slug]) }}" class="btn btn-warning">Edit</a>
+                                <form action="{{ route('subcategories.destroy',  [$category->slug, $subcategory->slug]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -33,7 +33,7 @@
                             </li>
                         @empty
                             <li class="list-group-item">
-                                No categories Added
+                                No subcategories Added
                             </li>
                         @endforelse
                     </ul>

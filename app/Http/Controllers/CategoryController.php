@@ -48,7 +48,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show')->withCategory($category);
+        return view('admin.categories.show')->withCategory($category)->withSubcategories($category->subcategories());
     }
 
     /**
