@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Admin;
 use App\Category;
+use App\Course;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         //factory(User::class,10)->create();
         //factory(Admin::class,10)->create();
         //factory(Category::class,10)->create();
+        //factory(Course::class, 10)->create();
     }
 }

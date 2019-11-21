@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Course extends Model
 {
     protected $guarded = [];
 
@@ -13,8 +13,8 @@ class Category extends Model
         return 'slug';
     }
 
-    public function subcategories()
+    public static function activeCourses()
     {
-        return $this->hasMany('App\Category', 'category_id')->whereNotNull('category_id');
+        return $this->whereVisible(1)->get();
     }
 }

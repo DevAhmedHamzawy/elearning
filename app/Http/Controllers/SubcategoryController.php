@@ -24,7 +24,7 @@ class SubcategoryController extends Controller
      */
     public function create(Category $category)
     {
-        return view('admin.subcategories.create')->withCategory($category);
+        return view('admin.subcategories.add')->withCategory($category);
     }
 
     /**

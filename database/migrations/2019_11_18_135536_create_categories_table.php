@@ -20,8 +20,8 @@ class CreateCategoriesTable extends Migration
 			$table->text('description');
 			$table->boolean('visible');
 			$table->bigInteger('category_id')->nullable()->unsigned();
-			$table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

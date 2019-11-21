@@ -32,3 +32,9 @@ Route::group(['prefix' => '/admin','middleware' => 'assign.guard:admin,admin/log
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'web'], function (){
+
+Route::resource('courses', 'CourseController');
+
+});
