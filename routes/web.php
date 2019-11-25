@@ -36,5 +36,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'web'], function (){
 
 Route::resource('courses', 'CourseController');
+Route::resource('courses/{course}/sections', 'SectionController');
 
 });

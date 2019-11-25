@@ -15,10 +15,16 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                        
                     <ul class="list-group">
                         <li class="list-group-item">
-                            {{ $course->name }}
+                            Sections
+                            <button type="button" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#addSection">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <div id="app">
+                                <sections course_slug="{{ $course->slug }}" course_sections="{{ $course->sections }}"></sections>
+                            </div>
                         </li>
                     </ul>
                 </div>
