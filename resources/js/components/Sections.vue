@@ -41,6 +41,7 @@
          <li class="list-group-item">{{ section.name }}
            <button @click="editSection(section)" data-toggle="modal" data-target="#addSection" class="btn btn-warning"><i class="fas fa-edit"></i></button>
            <button @click="deleteSection(section.slug, key)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+           <button class="btn btn-primary"><a :href="course_slug+'/sections/'+section.slug">Show</a></button>
 
          </li>
         
@@ -66,7 +67,6 @@ export default {
         name: '',
         description: '',
       },
-      pagination: {},
       edit: false
     };
   },

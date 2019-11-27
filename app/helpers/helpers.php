@@ -7,8 +7,8 @@ function upload_image($image, $name){
     return $fileName;
 }
 
-function upload_video($video, $sort, $name){
-    $sorts = ["promo" => "public/courses/promos/"];
+function upload_video($video, $sort, $name, $course_name = null, $section_name = null){
+    $sorts = ["promo" => "public/courses/promos/", "lesson" => "public/courses/${course_name}/sections/${section_name}/lessons/"];
     $fileName = str_slug($name) . '.' . $video->getClientOriginalExtension();
     $video->storePubliclyAs($sorts[$sort], $fileName);
 

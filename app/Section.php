@@ -12,4 +12,11 @@ class Section extends Model
     }
     
     protected $guarded = [];
+
+    protected $with = ['lectures'];
+
+
+    public function lectures(){
+        return $this->hasMany('App\Lecture');
+    }
 }

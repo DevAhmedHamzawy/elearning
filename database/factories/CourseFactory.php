@@ -26,6 +26,6 @@ $factory->define(Course::class, function (Faker $faker) {
         'promo_video_url' => 'https://www.youtube.com/watch?v=g_aMpyMvQ9k',
         'start_date' => $faker->dateTime(),
         'end_date' => $faker->dateTime(),
-        'hours_number' => $faker->randomNumber()
+        'hours_number' => $faker->randomNumber(3)
     ];
 });

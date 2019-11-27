@@ -1829,6 +1829,117 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Lectures.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Lectures.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['default_lectures', 'course_slug', 'section_slug'],
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$on('lecture_created', function (lecture) {
+      /*window.noty({
+      	message: 'Lecture created successfully',
+      	type: 'success'
+      })*/
+      _this.lectures.push(lecture);
+    });
+    this.$on('lecture_updated', function (lecture) {
+      var lectureIndex = _this.lectures.findIndex(function (l) {
+        return lecture.id == l.id;
+      });
+
+      _this.lectures.splice(lectureIndex, 1, lecture);
+      /*window.noty({
+      	message: 'Lecture updated successfully',
+      	type: 'success'
+      })*/
+
+    });
+  },
+  components: {
+    "lecture-modal": __webpack_require__(/*! ./children/LectureModal.vue */ "./resources/js/components/children/LectureModal.vue")["default"]
+  },
+  data: function data() {
+    return {
+      lectures: JSON.parse(this.default_lectures)
+    };
+  },
+  computed: {},
+  methods: {
+    createNewLecture: function createNewLecture() {
+      var courseSlug = this.course_slug;
+      var sectionSlug = this.section_slug;
+      this.$emit('create_new_lecture', {
+        courseSlug: courseSlug,
+        sectionSlug: sectionSlug
+      });
+    },
+    deleteLecture: function deleteLecture(slug, key) {
+      var _this2 = this;
+
+      if (confirm('Are you sure you wanna delete ?')) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/courses/".concat(this.course_slug, "/sections/").concat(this.section_slug, "/lectures/").concat(slug)).then(function (resp) {
+          _this2.lectures.splice(key, 1);
+          /*window.noty({
+          message: 'Lecture deleted successfully',
+          type: 'success'
+          })*/
+
+        })["catch"](function (error) {
+          window.handleErrors(error);
+        });
+      }
+    },
+    editLecture: function editLecture(lecture) {
+      var courseSlug = this.course_slug;
+      var sectionSlug = this.section_slug;
+      this.$emit('edit_lecture', {
+        lecture: lecture,
+        courseSlug: courseSlug,
+        sectionSlug: sectionSlug
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sections.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sections.vue?vue&type=script&lang=js& ***!
@@ -1840,6 +1951,7 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -1906,7 +2018,6 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         description: ''
       },
-      pagination: {},
       edit: false
     };
   },
@@ -1983,6 +2094,155 @@ __webpack_require__.r(__webpack_exports__);
       this.section.id = null;
       this.section.name = '';
       this.section.description = '';
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/children/LectureModal.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/children/LectureModal.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+var Lecture = function Lecture(lecture) {
+  _classCallCheck(this, Lecture);
+
+  this.name = lecture.name || '';
+  this.description = lecture.description || '';
+  this.video = lecture.video || '';
+  this.episode_number = lecture.episode_number || '';
+  this.premium = lecture.premium || false;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$parent.$on('create_new_lecture', function (_ref) {
+      var courseSlug = _ref.courseSlug,
+          sectionSlug = _ref.sectionSlug;
+      _this.courseSlug = courseSlug;
+      _this.sectionSlug = sectionSlug;
+      _this.editing = false;
+      _this.lecture = new Lecture({});
+      $('#createLecture').modal();
+    });
+    this.$parent.$on('edit_lecture', function (_ref2) {
+      var lecture = _ref2.lecture,
+          courseSlug = _ref2.courseSlug,
+          sectionSlug = _ref2.sectionSlug;
+      _this.editing = true;
+      _this.lecture = new Lecture(lecture);
+      _this.courseSlug = courseSlug;
+      _this.sectionSlug = sectionSlug;
+      _this.lectureSlug = lecture.slug;
+      $('#createLecture').modal();
+    });
+  },
+  data: function data() {
+    return {
+      lecture: {},
+      courseSlug: '',
+      sectionSlug: '',
+      editing: false,
+      lectureSlug: null,
+      premium: false,
+      errors: ''
+    };
+  },
+  methods: {
+    handleFileUpload: function handleFileUpload() {
+      this.lecture.video = this.$refs.file.files[0];
+    },
+    createLecture: function createLecture() {
+      var _this2 = this;
+
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('name', this.lecture.name);
+      formData.append('description', this.lecture.description);
+      formData.append('video_file', this.lecture.video);
+      formData.append('episode_number', this.lecture.episode_number);
+      formData.append('premium', this.lecture.premium);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/courses/".concat(this.courseSlug, "/sections/").concat(this.sectionSlug, "/lectures"), formData, config).then(function (resp) {
+        console.log(resp.data);
+
+        _this2.$parent.$emit('lecture_created', resp.data);
+
+        $('#createLecture').modal('hide');
+      })["catch"](function (err) {
+        //window.handleErrors(error)
+        _this2.errors = err.response.data.errors;
+      });
+    },
+    updateLecture: function updateLecture() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/courses/".concat(this.courseSlug, "/sections/").concat(this.sectionSlug, "/lectures/").concat(this.lectureSlug), this.lecture).then(function (resp) {
+        $("#createLecture").modal('hide');
+
+        _this3.$parent.$emit('lecture_updated', resp.data);
+      })["catch"](function (err) {
+        //window.handleErrors(error)
+        _this3.errors = err.response.data.errors;
+      });
     }
   }
 });
@@ -37280,6 +37540,103 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Lectures.vue?vue&type=template&id=7a0a55a0&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Lectures.vue?vue&type=template&id=7a0a55a0& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "container",
+      staticStyle: { color: "black", "font-weight": "bold" }
+    },
+    [
+      _c("h1", { staticClass: "text-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            on: {
+              click: function($event) {
+                return _vm.createNewLecture()
+              }
+            }
+          },
+          [_vm._v("\n\t\t\tCreate New Lecture\n\t\t")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", {}, [
+        _c(
+          "ul",
+          { staticClass: "list-group d-flex" },
+          _vm._l(_vm.lectures, function(lecture) {
+            return _c(
+              "li",
+              {
+                key: lecture.id,
+                staticClass: "list-group-item d-flex justify-content-between"
+              },
+              [
+                _c("p", [_vm._v(_vm._s(lecture.name))]),
+                _vm._v(" "),
+                _c("p", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-xs",
+                      on: {
+                        click: function($event) {
+                          return _vm.editLecture(lecture)
+                        }
+                      }
+                    },
+                    [_vm._v("\n\t\t\t\t\t\tEdit\n\t\t\t\t\t")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-xs",
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteLecture(lecture.slug, _vm.key)
+                        }
+                      }
+                    },
+                    [_vm._v("\n\t\t\t\t\t\tDelete\n\t\t\t\t\t")]
+                  )
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("lecture-modal")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sections.vue?vue&type=template&id=4200ac99&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sections.vue?vue&type=template&id=4200ac99& ***!
@@ -37490,7 +37847,17 @@ var render = function() {
                 }
               },
               [_c("i", { staticClass: "fas fa-trash" })]
-            )
+            ),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-primary" }, [
+              _c(
+                "a",
+                {
+                  attrs: { href: _vm.course_slug + "/sections/" + section.slug }
+                },
+                [_vm._v("Show")]
+              )
+            ])
           ])
         ])
       })
@@ -37515,6 +37882,276 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/children/LectureModal.vue?vue&type=template&id=517b2144&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/children/LectureModal.vue?vue&type=template&id=517b2144& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "createLecture",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.lecture.name,
+                    expression: "lecture.name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Lecture Name" },
+                domProps: { value: _vm.lecture.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.lecture, "name", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.name
+                ? _c("span", { staticClass: "warning" }, [
+                    _vm._v(_vm._s(_vm.errors.name[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.lecture.description,
+                    expression: "lecture.description"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { cols: "30", rows: "10" },
+                domProps: { value: _vm.lecture.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.lecture, "description", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.description
+                ? _c("span", { staticClass: "warning" }, [
+                    _vm._v(_vm._s(_vm.errors.description[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            !_vm.editing
+              ? _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    ref: "file",
+                    staticClass: "form-control",
+                    attrs: { type: "file", placeholder: "Lecture Video" },
+                    on: {
+                      change: function($event) {
+                        return _vm.handleFileUpload()
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.video_file
+                    ? _c("span", { staticClass: "warning" }, [
+                        _vm._v(_vm._s(_vm.errors.video_file[0]))
+                      ])
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.lecture.episode_number,
+                    expression: "lecture.episode_number"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", placeholder: "Episode number" },
+                domProps: { value: _vm.lecture.episode_number },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.lecture, "episode_number", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.episode_number
+                ? _c("span", { staticClass: "warning" }, [
+                    _vm._v(_vm._s(_vm.errors.episode_number[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.lecture.premium,
+                    expression: "lecture.premium"
+                  }
+                ],
+                attrs: { type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.lecture.premium)
+                    ? _vm._i(_vm.lecture.premium, null) > -1
+                    : _vm.lecture.premium
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.lecture.premium,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.lecture, "premium", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.lecture,
+                            "premium",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.lecture, "premium", $$c)
+                    }
+                  }
+                }
+              }),
+              _vm._v(" Premium: " + _vm._s(_vm.lecture.premium) + "\n\t\t\t\t"),
+              _vm.errors.premium
+                ? _c("span", { staticClass: "warning" }, [
+                    _vm._v(_vm._s(_vm.errors.premium[0]))
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_vm._v("Close")]
+            ),
+            _vm._v(" "),
+            _vm.editing
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateLecture()
+                      }
+                    }
+                  },
+                  [_vm._v("Save lecture")]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.createLecture()
+                      }
+                    }
+                  },
+                  [_vm._v("Create lecture")]
+                )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Create new Lecture")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -49685,6 +50322,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('sections', __webpack_require__(/*! ./components/Sections.vue */ "./resources/js/components/Sections.vue")["default"]);
+Vue.component('lectures', __webpack_require__(/*! ./components/Lectures.vue */ "./resources/js/components/Lectures.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49739,6 +50377,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/Lectures.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Lectures.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Lectures_vue_vue_type_template_id_7a0a55a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Lectures.vue?vue&type=template&id=7a0a55a0& */ "./resources/js/components/Lectures.vue?vue&type=template&id=7a0a55a0&");
+/* harmony import */ var _Lectures_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Lectures.vue?vue&type=script&lang=js& */ "./resources/js/components/Lectures.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Lectures_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Lectures_vue_vue_type_template_id_7a0a55a0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Lectures_vue_vue_type_template_id_7a0a55a0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Lectures.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Lectures.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Lectures.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Lectures_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Lectures.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Lectures.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Lectures_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Lectures.vue?vue&type=template&id=7a0a55a0&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Lectures.vue?vue&type=template&id=7a0a55a0& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Lectures_vue_vue_type_template_id_7a0a55a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Lectures.vue?vue&type=template&id=7a0a55a0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Lectures.vue?vue&type=template&id=7a0a55a0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Lectures_vue_vue_type_template_id_7a0a55a0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Lectures_vue_vue_type_template_id_7a0a55a0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -49806,6 +50513,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sections_vue_vue_type_template_id_4200ac99___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sections_vue_vue_type_template_id_4200ac99___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/children/LectureModal.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/children/LectureModal.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LectureModal_vue_vue_type_template_id_517b2144___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LectureModal.vue?vue&type=template&id=517b2144& */ "./resources/js/components/children/LectureModal.vue?vue&type=template&id=517b2144&");
+/* harmony import */ var _LectureModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LectureModal.vue?vue&type=script&lang=js& */ "./resources/js/components/children/LectureModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _LectureModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LectureModal_vue_vue_type_template_id_517b2144___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LectureModal_vue_vue_type_template_id_517b2144___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/children/LectureModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/children/LectureModal.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/children/LectureModal.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LectureModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./LectureModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/children/LectureModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LectureModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/children/LectureModal.vue?vue&type=template&id=517b2144&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/children/LectureModal.vue?vue&type=template&id=517b2144& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LectureModal_vue_vue_type_template_id_517b2144___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./LectureModal.vue?vue&type=template&id=517b2144& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/children/LectureModal.vue?vue&type=template&id=517b2144&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LectureModal_vue_vue_type_template_id_517b2144___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LectureModal_vue_vue_type_template_id_517b2144___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
