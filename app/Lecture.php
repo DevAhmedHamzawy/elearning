@@ -12,4 +12,8 @@ class Lecture extends Model
     {
         return 'slug';
     }
+
+    public function attachments(){
+        return $this->hasMany('App\Attachment');
+    }
 }

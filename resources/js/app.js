@@ -19,8 +19,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
+Vue.config.ignoredElements = ['video-js']
 Vue.component('sections', require('./components/Sections.vue').default);
 Vue.component('lectures', require('./components/Lectures.vue').default);
+Vue.component('attachments', require('./components/Attachments.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

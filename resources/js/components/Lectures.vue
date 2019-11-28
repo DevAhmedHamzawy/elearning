@@ -16,6 +16,7 @@
 						<button class="btn btn-danger btn-xs" @click="deleteLecture(lecture.slug, key)">
 							Delete
 						</button>
+						<button class="btn btn-primary"><a :href="section_slug+'/lectures/'+lecture.slug">Show</a></button>
 					</p>
 				</li>
 			</ul>

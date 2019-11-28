@@ -48,9 +48,9 @@ class LectureController extends Controller
      * @param  \App\Lecture  $lecture
      * @return \Illuminate\Http\Response
      */
-    public function show(Lecture $lecture)
+    public function show(Course $course, Section $section, Lecture $lecture)
     {
-        //
+        return view('main.lectures.show')->withCourse($course)->withSection($section)->withLecture($lecture);
     }
 
     /**

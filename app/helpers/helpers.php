@@ -14,3 +14,10 @@ function upload_video($video, $sort, $name, $course_name = null, $section_name =
 
     return $fileName;
 }
+
+function upload_file($file, $course_name = null, $section_name = null, $lecture_name = null){
+    $fileName = str_slug($file) . '.' . $file->getClientOriginalExtension();
+    $file->storePubliclyAs("public/courses/${course_name}/sections/${section_name}/attachments/${lecture_name}/", $fileName);
+
+    return $fileName;
+}
