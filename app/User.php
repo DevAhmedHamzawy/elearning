@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Course');
     }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\Rating')->where('spam', 0)->orWhereNull('spam');
+    }
 }

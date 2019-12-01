@@ -27,6 +27,18 @@
                             </div>
                         </li>
                     </ul>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            Ratings
+                            <button type="button" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#addRating">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <div id="app">
+                                <ratings course_slug="{{ $course->slug }}" total_course_ratings="{{ round($course->ratings->avg('rating'),1) }}" course_ratings="{{ $course->ratings }}" auth_user_id={{ auth()->user()->id }}></ratings>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -38,7 +38,13 @@ Route::group(['middleware' => 'web'], function (){
 Route::resource('courses', 'CourseController');
 Route::resource('courses/{course}/sections', 'SectionController');
 Route::resource('courses/{course}/sections/{section}/lectures', 'LectureController');
+
+
+
 Route::resource('courses/{course}/sections/{section}/lectures/{lecture}/attachments', 'AttachmentController');
+Route::resource('courses/{course}/ratings', 'RatingController');
+
+
 
 
 });

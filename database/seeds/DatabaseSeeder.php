@@ -6,6 +6,7 @@ use App\Admin;
 use App\Category;
 use App\Course;
 use App\Lecture;
+use App\Rating;
 use App\Section;
 
 class DatabaseSeeder extends Seeder
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         //factory(Course::class, 30)->create();
         //factory(Section::class, 60)->create();
         //factory(Lecture::class, 60)->create();
+        //factory(Rating::class, 60)->create();
     }
 }
