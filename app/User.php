@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Rating')->where('spam', 0)->orWhereNull('spam');
     }
+
+    public function favourites()
+    {
+        return $this->hasMany('App\Favourite');
+    }
 }

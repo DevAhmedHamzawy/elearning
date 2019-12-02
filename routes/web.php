@@ -43,6 +43,7 @@ Route::resource('courses/{course}/sections/{section}/lectures', 'LectureControll
 
 Route::resource('courses/{course}/sections/{section}/lectures/{lecture}/attachments', 'AttachmentController');
 Route::resource('courses/{course}/ratings', 'RatingController');
+Route::resource('courses/{course}/favourites', 'FavouriteController');
 
 
 

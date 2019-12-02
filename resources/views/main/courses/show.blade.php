@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     {{ $course->name }}
+                    <favourites :course="{{ $course }}" course_slug="{{ $course->slug }}"  course_id="{{ $course->id }}" :initial-favourites="{{ $course->favourites }}" />
                 </div>
 
                 <div class="card-body">

@@ -8,7 +8,7 @@ class Course extends Model
 {
     protected $guarded = [];
 
-    protected $with = ['sections','ratings'];
+    protected $with = ['sections','ratings','favourites'];
 
     public function getRouteKeyName()
     {
@@ -28,6 +28,11 @@ class Course extends Model
     public function Ratings()
     {
         return $this->hasMany('App\Rating')->where('spam','0')->orWhereNull('spam');
+    }
+
+    public function favourites()
+    {
+        return $this->hasMany('App\Favourite');
     }
 
     public function delete(){
