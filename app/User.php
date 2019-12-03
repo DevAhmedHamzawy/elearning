@@ -49,4 +49,19 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Favourite');
     }
+
+    public function delete(){
+
+        // Delete Courses Related To First
+        $this->courses()->delete();
+
+        // Delete Ratings Related To First
+        $this->ratings()->delete();
+
+        // Delete Favourites Related To First
+        $this->favourites()->delete();
+
+        // Afterwards Delete The Course
+        return parent::delete();
+    }
 }

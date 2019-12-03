@@ -8,6 +8,8 @@ use App\Course;
 use App\Lecture;
 use App\Rating;
 use App\Section;
+use App\Setting;
+use App\Widget;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,5 +28,6 @@ class DatabaseSeeder extends Seeder
         //factory(Section::class, 60)->create();
         //factory(Lecture::class, 60)->create();
         //factory(Rating::class, 60)->create();
+        //factory(Widget::class, 5)->create();
     }
 }

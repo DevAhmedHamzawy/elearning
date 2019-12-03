@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Setting;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,45 +41,46 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Setting  $setting
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Setting $setting)
     {
-        return view('main.profile.show')->withUser(auth()->user());
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Setting  $setting
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Setting $setting)
     {
-        return view('main.profile.edit')->withUser(auth()->user());
+        return view('admin.settings.edit')->withSettings($setting);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Setting  $setting
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Setting $setting)
     {
-        auth()->user()->update($request->all());
-        return redirect()->back()->with('status', 'Profile Updated Successfully');
+        $setting->update($request->except('logo_img'));
+        return redirect()->back()->with('status', 'Settings Updated Successfully');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Setting  $setting
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Setting $setting)
     {
         //
     }

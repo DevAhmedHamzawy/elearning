@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Widget;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class WidgetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.widgets.index')->withWidgets(Widget::all());
     }
 
     /**
@@ -41,45 +41,45 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Widget  $widget
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Widget $widget)
     {
-        return view('main.profile.show')->withUser(auth()->user());
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Widget  $widget
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Widget $widget)
     {
-        return view('main.profile.edit')->withUser(auth()->user());
+        return view('admin.widgets.edit')->withWidget($widget);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Widget  $widget
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Widget $widget)
     {
-        auth()->user()->update($request->all());
-        return redirect()->back()->with('status', 'Profile Updated Successfully');
+        $widget->update($request->all());
+        return redirect()->route('widgets.index')->with('status', 'Widget Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Widget  $widget
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Widget $widget)
     {
         //
     }

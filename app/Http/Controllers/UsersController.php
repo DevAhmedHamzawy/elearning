@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.users.index')->withUsers(User::all());
     }
 
     /**
@@ -24,7 +25,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.add');
     }
 
     /**
@@ -35,7 +36,9 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->merge(['password' => Hash::make($request->password)]);
+        User::create($request->all());   
+        return redirect()->route('users.index')->with('status', 'User Added Successfully');
     }
 
     /**
@@ -44,9 +47,9 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(User $user)
     {
-        return view('main.profile.show')->withUser(auth()->user());
+        return view('admin.users.show')->withUser($user);
     }
 
     /**
@@ -55,9 +58,9 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(User $user)
     {
-        return view('main.profile.edit')->withUser(auth()->user());
+        return view('admin.users.edit')->withUser($user);
     }
 
     /**
@@ -67,10 +70,11 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        auth()->user()->update($request->all());
-        return redirect()->back()->with('status', 'Profile Updated Successfully');
+        $request->merge(['password' => Hash::make($request->password)]);
+        $user->update($request->all());
+        return redirect()->route('users.index')->with('status', 'User Updated Successfully');
     }
 
     /**
@@ -81,6 +85,7 @@ class ProfileController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('users.index')->with('status', 'User Deleted Successfully');
     }
 }
