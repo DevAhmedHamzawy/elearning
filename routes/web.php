@@ -46,6 +46,7 @@ Route::resource('courses/{course}/ratings', 'RatingController');
 Route::resource('courses/{course}/favourites', 'FavouriteController');
 
 
+Route::resource('profile', 'ProfileController');
 
 
 });
