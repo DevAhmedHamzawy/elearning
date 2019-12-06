@@ -25,6 +25,11 @@ class Course extends Model
         return $this->hasMany('App\Section');
     }
 
+    public function lectures()
+    {
+        return $this->hasMany('App\Lecture');
+    }
+
     public function Ratings()
     {
         return $this->hasMany('App\Rating')->where('spam','0')->orWhereNull('spam');
@@ -33,6 +38,10 @@ class Course extends Model
     public function favourites()
     {
         return $this->hasMany('App\Favourite');
+    }
+
+    public function getOrderedLectures(){
+        return $this->lectures->sortBy('episode_number');
     }
 
     public function delete(){

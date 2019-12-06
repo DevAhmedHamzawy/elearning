@@ -10,26 +10,6 @@ use App\Section;
 class LectureController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -50,20 +30,8 @@ class LectureController extends Controller
      */
     public function show(Course $course, Section $section, Lecture $lecture)
     {
-        return view('main.lectures.show')->withCourse($course)->withSection($section)->withLecture($lecture);
+        return view('user.instructor.lectures.show')->withCourse($course)->withSection($section)->withLecture($lecture);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Lecture  $lecture
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Lecture $lecture)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *

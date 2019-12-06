@@ -40,17 +40,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'web'], function (){
 
 Route::resource('courses', 'CourseController');
-Route::resource('courses/{course}/sections', 'SectionController');
-Route::resource('courses/{course}/sections/{section}/lectures', 'LectureController');
+Route::resource('courses/{course}/sections', 'SectionController', ['only' => ['store', 'show', 'update', 'destroy']]);
+Route::resource('courses/{course}/sections/{section}/lectures', 'LectureController', ['only' => ['store', 'show', 'update', 'destroy']]);
 
 
 
-Route::resource('courses/{course}/sections/{section}/lectures/{lecture}/attachments', 'AttachmentController');
-Route::resource('courses/{course}/ratings', 'RatingController');
-Route::resource('courses/{course}/favourites', 'FavouriteController');
+Route::resource('courses/{course}/sections/{section}/lectures/{lecture}/attachments', 'AttachmentController', ['only' => ['index', 'store']]);
+Route::resource('courses/{course}/ratings', 'RatingController', ['only' => ['store', 'update']]);
+Route::resource('courses/{course}/favourites', 'FavouriteController', ['only' => ['store', 'destroy']]);
 
 
-Route::resource('profile', 'ProfileController');
+Route::resource('profile', 'ProfileController', ['only' => ['show', 'edit', 'update']]);
 
+Route::get('/watch-course/{course}', 'WatchCourseController@index')->name('course.learning');
+Route::post('/course/complete-lecture/{lecture}', 'WatchCourseController@completeLecture');
+Route::get('/course/{course}/lecture/{lecture}', 'WatchCourseController@showLecture')->name('course.watch');
 
 });

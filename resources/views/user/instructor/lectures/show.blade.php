@@ -18,11 +18,9 @@
                         
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <video-js id="video" class="vjs-default-skin" controls preload="auto" width="640" height="268">
+                            <video id="video" onended="videoEnded()" controls  width="640" height="268">
                                 <source src='{{ asset("storage/courses/{$course->slug}/sections/{$section->slug}/lessons/{$lecture->video}") }}' type="video/mp4">
-                            </video-js>
-                            
-                           
+                            </video>
                         </li>
                     </ul>
 
@@ -36,44 +34,14 @@
 </div>
 @endsection
 
-@section('styles')
-    <link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">
-    <style>
-        .vjs-default-skin {
-            width: 100%;
-        }
-        .thumbs-up, .thumbs-down {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            fill: currentColor;
-        }
-
-        .thumbs-down-active, .thumbs-up-active {
-            color: #3EA6FF;
-        }
-
-        .thumbs-down {
-            margin-left: 1rem;
-        }
-    </style>
-
-    <style>
-        .w-full {
-            width: 100% !important;
-        }
-        .w-80 {
-            width: 80% !important;
-        }
-    </style>
-@endsection
-
-
-@section('scripts')
-    <script src='https://vjs.zencdn.net/7.5.4/video.js'></script>
-    
+@section('scripts')    
     <script>
         window.CURRENT_VIDEO = '{{ $lecture->video }}'
     </script>
-    <script src='{{ asset('js/player.js') }}'></script>
+    <!-- script src='{{ asset('js/player.js') }}'></script!-->
+    <script>
+        function videoEnded() {
+    
+        }
+    </script>
 @endsection

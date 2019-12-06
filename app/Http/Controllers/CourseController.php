@@ -15,7 +15,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('main.courses.index')->withCourses(Course::whereUserId(auth()->user()->id)->get());
+        return view('user.instructor.courses.index')->withCourses(Course::whereUserId(auth()->user()->id)->get());
     }
 
     /**
@@ -25,7 +25,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('main.courses.add')->withCategories(Category::all());
+        return view('user.instructor.courses.add')->withCategories(Category::all());
     }
 
     /**
@@ -51,7 +51,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('main.courses.show')->withCourse($course);
+        return view('user.instructor.courses.show')->withCourse($course);
     }
 
     /**
@@ -62,7 +62,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        return view('main.courses.edit')->withCourse($course)->withCategories(Category::all());
+        return view('user.instructor.courses.edit')->withCourse($course)->withCategories(Category::all());
     }
 
     /**
