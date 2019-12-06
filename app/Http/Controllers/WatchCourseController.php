@@ -29,4 +29,9 @@ class WatchCourseController extends Controller
         auth()->user()->completeLecture($lecture);
         return response()->json(['status' => 'ok']);
     }
+
+    public function info(Course $course)
+    {
+        return view('user.student.course.info', ['course' => $course]);
+    }
 }

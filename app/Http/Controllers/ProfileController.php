@@ -13,9 +13,9 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(User $user)
     {
-        return view('main.profile.show')->withUser(auth()->user());
+        return view('user.profile.show')->withUser($user)->withCourses($user->courseBeingWatched());
     }
 
     /**
@@ -26,7 +26,7 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('main.profile.edit')->withUser(auth()->user());
+        return view('user.profile.edit')->withUser(auth()->user());
     }
 
     /**

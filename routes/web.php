@@ -50,8 +50,14 @@ Route::resource('courses/{course}/ratings', 'RatingController', ['only' => ['sto
 Route::resource('courses/{course}/favourites', 'FavouriteController', ['only' => ['store', 'destroy']]);
 
 
-Route::resource('profile', 'ProfileController', ['only' => ['show', 'edit', 'update']]);
+Route::resource('profile', 'ProfileController', ['only' => ['edit', 'update']]);
+Route::get('profile/{user}', 'ProfileController@show');
+Route::post('/card/update', 'SubscriptionController@updateCard');
+Route::post('/subscribe', 'SubscriptionController@subscribe');    
+Route::post('/subscription/change', 'SubscriptionController@change')->name('subscriptions.change');        
+Route::get('/subscribe', 'SubscriptionController@showSubscriptionForm');
 
+Route::get('/watch-course/info/{course}', 'WatchCourseController@info')->name('course.info');
 Route::get('/watch-course/{course}', 'WatchCourseController@index')->name('course.learning');
 Route::post('/course/complete-lecture/{lecture}', 'WatchCourseController@completeLecture');
 Route::get('/course/{course}/lecture/{lecture}', 'WatchCourseController@showLecture')->name('course.watch');

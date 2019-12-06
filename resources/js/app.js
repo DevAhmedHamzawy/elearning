@@ -11,6 +11,8 @@ Vue.component('attachments', require('./components/Attachments.vue').default);
 Vue.component('ratings', require('./components/Ratings.vue').default);
 Vue.component('favourites', require('./components/Favourites.vue').default);
 Vue.component('player', require('./components/Player.vue').default);
+Vue.component('stripe', require('./components/Stripe.vue').default);
+Vue.component('update-card', require('./components/UpdateCard.vue').default);
 
 
 import StarRating from 'vue-star-rating'
