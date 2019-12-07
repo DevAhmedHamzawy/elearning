@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@welcome');
 
 // DON'T Put it inside the '/admin' Prefix , Otherwise you'll never get the page due to assign.guard that will redirect you too many times
 Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm');
@@ -33,11 +31,11 @@ Route::group(['prefix' => '/admin','middleware' => 'assign.guard:admin,admin/log
 
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'web'], function (){
+Route::group(['middleware' => 'verified'], function (){
 
 Route::resource('courses', 'CourseController');
 Route::resource('courses/{course}/sections', 'SectionController', ['only' => ['store', 'show', 'update', 'destroy']]);
@@ -45,7 +43,7 @@ Route::resource('courses/{course}/sections/{section}/lectures', 'LectureControll
 
 
 
-Route::resource('courses/{course}/sections/{section}/lectures/{lecture}/attachments', 'AttachmentController', ['only' => ['index', 'store']]);
+Route::resource('courses/{course}/sections/{section}/lectures/{lecture}/attachments', 'AttachmentController', ['only' => ['index', 'store', 'destroy']]);
 Route::resource('courses/{course}/ratings', 'RatingController', ['only' => ['store', 'update']]);
 Route::resource('courses/{course}/favourites', 'FavouriteController', ['only' => ['store', 'destroy']]);
 

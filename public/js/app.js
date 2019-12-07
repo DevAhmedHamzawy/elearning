@@ -1854,8 +1854,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   data: function data() {
     return {
       errors: [],
+      uploads: [],
       edit: false
     };
+  },
+  mounted: function mounted() {
+    this.getAttachments();
   },
   methods: {
     upload: function upload() {
@@ -1870,6 +1874,22 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           var data = _ref.data;
           _this.uploads = [].concat(_toConsumableArray(_this.uploads), [data]);
         });
+      });
+    },
+    getAttachments: function getAttachments() {
+      var _this2 = this;
+
+      return axios.get("".concat(this.lecture_slug, "/attachments")).then(function (_ref2) {
+        var data = _ref2.data;
+        _this2.uploads = data;
+      });
+    },
+    deleteAttachment: function deleteAttachment(path, file, key) {
+      var _this3 = this;
+
+      return axios["delete"]("".concat(this.lecture_slug, "/attachments/").concat(file)).then(function (_ref3) {
+        var data = _ref3.data;
+        _this3.uploads = data;
       });
     }
   }
@@ -55882,6 +55902,25 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+window.noty = function (notification) {
+  window.events.$emit('notification', notification);
+};
+
+window.handleErrors = function (error) {
+  if (error.response.status == 422) {
+    window.noty({
+      message: 'You had validation errors. Please try again.',
+      type: 'danger'
+    });
+  }
+
+  window.noty({
+    message: 'Something went wrong . Please refresh the page.',
+    type: 'danger'
+  });
+};
+
 Vue.component('sections', __webpack_require__(/*! ./components/Sections.vue */ "./resources/js/components/Sections.vue")["default"]);
 Vue.component('lectures', __webpack_require__(/*! ./components/Lectures.vue */ "./resources/js/components/Lectures.vue")["default"]);
 Vue.component('attachments', __webpack_require__(/*! ./components/Attachments.vue */ "./resources/js/components/Attachments.vue")["default"]);

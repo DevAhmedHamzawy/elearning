@@ -5,6 +5,24 @@ require('./bootstrap');
 window.Vue = require('vue');
 Vue.use(VueSweetalert2);
 
+window.noty = function(notification) {
+    window.events.$emit('notification', notification)
+}
+
+window.handleErrors = function(error) {
+	if(error.response.status == 422) {
+ 		window.noty({
+			message: 'You had validation errors. Please try again.',
+			type: 'danger'
+		})
+ 	}
+
+ 	window.noty({
+		message: 'Something went wrong . Please refresh the page.',
+		type: 'danger'
+	})
+}
+
 Vue.component('sections', require('./components/Sections.vue').default);
 Vue.component('lectures', require('./components/Lectures.vue').default);
 Vue.component('attachments', require('./components/Attachments.vue').default);

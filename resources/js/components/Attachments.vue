@@ -6,8 +6,12 @@ export default {
   data() {
     return {
       errors: [],
+      uploads: [],
       edit: false
     };
+  },
+  mounted() {
+    this.getAttachments()
   },
   methods: {
 
@@ -29,7 +33,19 @@ export default {
                     ]
                 })
             })
-  }
+  },
+  getAttachments(){
+      return axios.get(`${this.lecture_slug}/attachments`)
+                .then(({ data }) => {
+                    this.uploads = data
+      })      
+  },
+  deleteAttachment(path, file, key){
+      return axios.delete(`${this.lecture_slug}/attachments/${file}`)
+                .then(({ data }) => {
+                    this.uploads = data
+      })      
+  },
 }
 };
 </script>

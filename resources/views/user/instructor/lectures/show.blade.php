@@ -25,7 +25,16 @@
                     </ul>
 
                     <attachments course_slug="{{ $course->slug }}" section_slug="{{ $section->slug }}" lecture_slug="{{ $lecture->slug }}"  inline-template>
-                            <input type="file" multiple ref="attachments" @change="upload">
+                            <div>
+                                <input type="file" multiple ref="attachments" @change="upload">
+                                
+                                <div v-for="upload in uploads" :key="upload.id">
+                                    <a :href="upload[1]" target="_blank">@{{ upload[0] }}</a>
+                                    <button class="btn btn-danger btn-xs" @click="deleteAttachment(lecture_slug, upload[0] , key)">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
                     </attachments>
                 </div>
             </div>
