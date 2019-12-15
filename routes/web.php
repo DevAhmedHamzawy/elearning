@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@welcome');
+Route::get('/', 'PublicController@welcome');
 
 // DON'T Put it inside the '/admin' Prefix , Otherwise you'll never get the page due to assign.guard that will redirect you too many times
 Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm');
@@ -33,7 +33,7 @@ Route::group(['prefix' => '/admin','middleware' => 'assign.guard:admin,admin/log
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'PublicController@index')->name('home');
 
 Route::group(['middleware' => 'verified'], function (){
 
@@ -59,5 +59,16 @@ Route::get('/watch-course/info/{course}', 'WatchCourseController@info')->name('c
 Route::get('/watch-course/{course}', 'WatchCourseController@index')->name('course.learning');
 Route::post('/course/complete-lecture/{lecture}', 'WatchCourseController@completeLecture');
 Route::get('/course/{course}/lecture/{lecture}', 'WatchCourseController@showLecture')->name('course.watch');
+
+Route::get('courses', 'PublicController@courses')->name('courses.all');
+Route::get('category/{category}', 'PublicController@courseByCategory')->name('category.courses');
+Route::get('sub-category/{subcategory}', 'PublicController@courseBySubCategory')->name('subcategory.courses');
+Route::get('course/{course}', 'PublicController@courseDetails')->name('course.details');
+Route::get('about', 'PublicController@about')->name('about');
+Route::get('contact', 'PublicController@contact')->name('contact');
+Route::resource('contacts', 'ContactController', ['only' => ['store']]);
+Route::post('newsletter', 'NewsletterController@subscribe')->name('newsletter.subscribe');
+Route::get('newslettermembers', 'NewsletterController@getMembers')->name('newsletter.members');
+
 
 });

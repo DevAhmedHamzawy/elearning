@@ -1,7 +1,7 @@
 <template>
 	<div class="container" style="color: black; font-weight: bold;">
 		<h1 class="text-center">
-			<button class="btn btn-primary" @click="createNewLecture()">
+			<button class="genric-btn info" @click="createNewLecture()">
 				Create New Lecture
 			</button>
 		</h1>
@@ -10,13 +10,15 @@
 				<li class="list-group-item d-flex justify-content-between" v-for="lecture in lectures" :key="lecture.id">
 					<p>{{ lecture.name }}</p> 
 					<p>
-						<button class="btn btn-primary btn-xs" @click="editLecture(lecture)">
-							Edit
+						<button class="genric-btn info-border"><a :href="section_slug+'/lectures/'+lecture.slug">
+							<i class="ti-eye"></i>
+						</a></button>
+						<button class="genric-btn warning-border" @click="editLecture(lecture)">
+							<i class="ti-pencil-alt"></i>
 						</button>
-						<button class="btn btn-danger btn-xs" @click="deleteLecture(lecture.slug, key)">
-							Delete
+						<button class="genric-btn danger-border" @click="deleteLecture(lecture.slug, key)">
+							<i class="ti-trash"></i>
 						</button>
-						<button class="btn btn-primary"><a :href="section_slug+'/lectures/'+lecture.slug">Show</a></button>
 					</p>
 				</li>
 			</ul>
@@ -32,10 +34,10 @@
 		props: ['default_lectures', 'course_slug', 'section_slug'],
 		mounted() {
 			this.$on('lecture_created', (lecture) => {
-				/*window.noty({
+				window.noty({
 					message: 'Lecture created successfully',
 					type: 'success'
-				})*/
+				})
 				this.lectures.push(lecture)
 			})
 
@@ -74,10 +76,10 @@
 					Axios.delete(`/courses/${this.course_slug}/sections/${this.section_slug}/lectures/${slug}`)
 						 .then(resp => {
 						 	this.lectures.splice(key, 1)
-						 	/*window.noty({
+						 	window.noty({
 								message: 'Lecture deleted successfully',
 								type: 'success'
-							})*/
+							})
 						 }).catch(error => {
 						 	window.handleErrors(error)
 						 })

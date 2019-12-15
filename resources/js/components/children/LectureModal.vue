@@ -10,25 +10,30 @@
 	        </div>
 	        <div class="modal-body">
 		        <div class="form-group">
-	              <input type="text" class="form-control" placeholder="Lecture Name" v-model="lecture.name">
+	              <input type="text" class="single-input" placeholder="Lecture Name" v-model="lecture.name">
 				  <span class="warning" v-if="errors.name">{{ errors.name[0] }}</span>
 	            </div>
 				<div class="form-group">
-	            	<textarea cols="30" rows="10" class="form-control" v-model="lecture.description"></textarea>
+	            	<textarea cols="30" rows="10" class="single-textarea" placeholder="Description" v-model="lecture.description">Description</textarea>
 					<span class="warning" v-if="errors.description">{{ errors.description[0] }}</span>
 	            </div>
 	            <div class="form-group" v-if="!editing">
-	              <input type="file" class="form-control" placeholder="Lecture Video" ref="file" @change="handleFileUpload()">
+	              <input type="file" class="single-input" placeholder="Lecture Video" ref="file" @change="handleFileUpload()">
 				  <span class="warning" v-if="errors.video_file">{{ errors.video_file[0] }}</span>
 				</div>
 	            <div class="form-group">
-	              <input type="number" class="form-control" placeholder="Episode number" v-model="lecture.episode_number">
+	              <input type="number" class="single-input" placeholder="Episode number" v-model="lecture.episode_number">
 				  <span class="warning" v-if="errors.episode_number">{{ errors.episode_number[0] }}</span>
 	            </div>
-				<div class="form-group">
-	            	<input type="checkbox" v-model="lecture.premium"> Premium: {{ lecture.premium }}
+				<div class="switch-wrap d-flex justify-content-between">
+					<p>Premium: {{ lecture.premium }}</p>
+					<div class="form-group primary-switch">
+	            	<input type="checkbox" id="default-switch" v-model="lecture.premium">
+					<label for="default-switch"></label>
 					<span class="warning" v-if="errors.premium">{{ errors.premium[0] }}</span>
-	            </div>
+	            	</div>
+				</div>
+				
 	        </div>
 	        <div class="modal-footer">
 	          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

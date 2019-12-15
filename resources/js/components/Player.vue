@@ -1,6 +1,6 @@
 <template>
   <div>
-    <video id="video" @ended="videoEnded()" v-if="lecture" width="640" height="268" controls>
+    <video id="video" @ended="videoEnded()" v-if="lecture" width="600" height="268" controls>
         <source :src="'../../../../../storage/courses/'+course_name+'/sections/'+section_name+'/lessons/'+lecture.video" type="video/mp4">
     </video>
   </div>

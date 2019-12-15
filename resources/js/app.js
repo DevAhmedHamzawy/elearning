@@ -27,6 +27,8 @@ Vue.component('sections', require('./components/Sections.vue').default);
 Vue.component('lectures', require('./components/Lectures.vue').default);
 Vue.component('attachments', require('./components/Attachments.vue').default);
 Vue.component('ratings', require('./components/Ratings.vue').default);
+Vue.component('ratingstwo', require('./components/RatingsTwo.vue').default);
+Vue.component('ratingsthree', require('./components/RatingsThree.vue').default);
 Vue.component('favourites', require('./components/Favourites.vue').default);
 Vue.component('player', require('./components/Player.vue').default);
 Vue.component('stripe', require('./components/Stripe.vue').default);

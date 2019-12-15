@@ -1,7 +1,8 @@
 <template>
-    <button @click="toggleFavourite" class="btn btn-danger">
+         <button @click="toggleFavourite" class="btn_1">
         {{ owner ? '' : favourite ? 'Unfavourite' : 'Favourite' }} {{ count }} {{ owner ? 'Favourites' : '' }}
     </button>
+   
 </template>
 
 <script>

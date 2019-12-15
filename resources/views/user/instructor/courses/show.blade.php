@@ -1,13 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner text-center">
+                        <div class="breadcrumb_iner_item">
+                            <h2>{{ $course->name }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<br><br>
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     {{ $course->name }}
-                    <favourites :course="{{ $course }}" course_slug="{{ $course->slug }}"  course_id="{{ $course->id }}" :initial-favourites="{{ $course->favourites }}" />
                 </div>
 
                 <div class="card-body">
@@ -17,26 +34,17 @@
                         </div>
                     @endif
                         
+                    <div class="card-header">
+                            Sections
+                            <button type="button" class="genric-btn warning" data-toggle="modal" data-target="#addSection">
+                                <i class="ti-plus"></i>
+                            </button>
+                    </div>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            Sections
-                            <button type="button" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#addSection">
-                                <i class="fas fa-plus"></i>
-                            </button>
+                           
                             <div id="app">
                                 <sections course_slug="{{ $course->slug }}" course_sections="{{ $course->sections }}"></sections>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            Ratings
-                            <button type="button" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#addRating">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                            <div id="app">
-                                <ratings course_slug="{{ $course->slug }}" total_course_ratings="{{ round($course->ratings->avg('rating'),1) }}" course_ratings="{{ $course->ratings }}" auth_user_id={{ auth()->user()->id }}></ratings>
                             </div>
                         </li>
                     </ul>

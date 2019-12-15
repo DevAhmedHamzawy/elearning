@@ -1,51 +1,25 @@
 <template>
   <div>
-   
-<!-- Modal -->
-<div class="modal fade" id="addRating" tabindex="-1" role="dialog" aria-labelledby="addRatingLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 v-if="this.edit === false" class="modal-title" id="addRatingLabel">New Rating</h5>
-        <h5 v-else class="modal-title" id="addRatingLabel">Edit Rating</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-    <form @submit.prevent="addRating" class="mb-3">
-       <star-rating v-model="rating.rating" :increment="0.5" :max-rating="5" inactive-color="#f2f2f2" active-color="#ff0"  :star-size="20"  :rating="rating.rating"></star-rating>
-       <textarea class="form-control animated" cols="50" id="new-review" v-model="rating.comment" placeholder="Enter your review here..." rows="5"></textarea>
-
-      <div class="modal-footer">
-        <button type="button" @click="clearForm()" data-dismiss="modal" class="btn btn-danger btn-block">Cancel</button>
-        <button v-if="this.edit == false" type="submit" class="btn btn-light btn-block">Add Rating</button>
-        <button v-else type="submit" class="btn btn-light btn-block">Edit Rating</button>
-      </div>
-    </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
      <star-rating :read-only="true" :max-rating="5" inactive-color="#f2f2f2" active-color="#ff0"  :star-size="20"  :rating="this.total_ratings"></star-rating>
     
-      <ul v-for="rating in ratings" :key="rating.id" class="list-group">
-       
-         <li class="list-group-item"> 
-           <star-rating :read-only="true"  :max-rating="5" inactive-color="#f2f2f2" active-color="#ff0"  :star-size="20"  :rating="rating.rating"></star-rating>
-           {{ rating.comment }}
-           {{ rating.auth_user_id }}
-           
-           <button @click="editRating(rating)" data-toggle="modal" data-target="#addRating" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+       <div class="progress-table-wrap">
+      <div class="progress-table">
+        <div class="table-head">
+          <div class="id">#</div>
+          <div class="course_name">Course Name</div>
+          <div class="operations">Operations</div>
+        </div>
+         <div class="table-row" v-for="rating in ratings" :key="rating.id">
+            <div class="id"><star-rating :read-only="true"  :max-rating="5" inactive-color="#f2f2f2" active-color="#ff0"  :star-size="20"  :rating="rating.rating"></star-rating>
+</div>
+            <div class="course_name">{{ rating.comment }}</div>
+            <!--<button @click="editRating(rating)" data-toggle="modal" data-target="#addRating" class="btn btn-warning"><i class="fas fa-edit"></i></button>-->
 
-         </li>
-        
-        
-      </ul>
-     
+        </div>
+      </div>
+    </div>
+
+    
  
 
   </div>

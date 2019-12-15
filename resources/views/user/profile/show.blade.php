@@ -20,7 +20,7 @@
 @stop
 
 @section('content')
-<section class="section" id="section-vtab">
+<section class="special_cource padding_top" id="section-vtab">
     <div class="container">
         <header class="section-header">
         <h2>Course being watched ...</h2>
@@ -29,22 +29,35 @@
 
 
         <div class="row gap-5">
-            @forelse($courses as $c)
-                <div class="card mb-30">
-                <div class="row">
-                    <div class="col-12 col-md-4 align-self-center">
-                    <a href=""><img src="{{ $c->image_path }}" alt="..."></a>
-                    </div>
+            @forelse($courses as $course)
+            <div class="col-sm-6 col-lg-4">
+                    <div class="single_special_cource">
+                        <img src="{{ $course->thumbnail }}" class="special_img" alt="">
+                        <div class="special_cource_text">
+                            <a href="course-details.html" class="btn_4">{{ $course->category->name }}</a>
+                            <h4>{{ $course->price }}$</h4>
+                            <a href="{{ route('course.details', $course->slug) }}">
+                                <h3>{{ $course->name }}</h3>
+                            </a>
+                            <p>{{ $course->description }}</p>
+                            <div class="author_info">
+                                <div class="author_img">
+                                    <img src="{{ $course->user->img }}" width="50" height="50" alt="">
+                                    <div class="author_info_text">
+                                        <p>Conduct by:</p>
+                                        <h5><a href="#">{{ $course->user->user_name }}</a></h5>
+                                    </div>
+                                </div>
+                                <div class="author_rating">
+                                    <div class="rating">
+                                        <ratingsthree total_course_ratings="{{ round($course->ratings->avg('rating'),1) }}"></ratingsthree>
+                                    </div>
+                                    <p>{!! $course->ratings->avg('rating') !!} Ratings</p>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="col-12 col-md-8">
-                    <div class="card-block">
-                        <h4 class="card-title">{{ $c->title }}</h4>
-                    
-                        <p class="card-text">{{ $c->description }}</p>
-                        <a class="fw-600 fs-12" href="{{ route('course', $c->slug) }}">Read more <i class="fa fa-chevron-right fs-9 pl-8"></i></a>
                     </div>
-                    </div>
-                </div>
                 </div>
             @empty
                 You Didn't Watch Any Course
@@ -101,10 +114,16 @@ $subscription = auth()->user()->subscriptions->first();
                 <form action="{{ route('profile.update', $user->id)  }}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <input class="form-control form-control-lg" type="text" name="name" placeholder="Your name">
+                            <input class="form-control form-control-lg" type="text" name="user_name" placeholder="{{ $user->user_name }}">
                         </div>
                         <div class="form-group">
-                            <input class="form-control form-control-lg" type="text" name="email" placeholder="Your email">
+                            <input class="form-control form-control-lg" type="text" name="first_name" placeholder="{{ $user->first_name }}">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control form-control-lg" type="text" name="last_name" placeholder="{{ $user->last_name }}">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror textarea" cols="30" rows="10" required autocompleted="description">{{ $user->description }}</textarea>
                         </div>
 
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>

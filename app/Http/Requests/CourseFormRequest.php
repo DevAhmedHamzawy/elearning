@@ -35,7 +35,7 @@ class CourseFormRequest extends FormRequest
             'what_will_students_learn' => 'required|min:50|max:4294977295',
             'target_students' => 'required|min:50|max:4294977295',
             'requirements' => 'required|min:50|max:4294977295',
-            'video' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi|max:20000',
+            //'video' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi|max:20000',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'hours_number' => 'required|numeric'

@@ -5,9 +5,9 @@
 <div class="modal fade" id="addSection" tabindex="-1" role="dialog" aria-labelledby="addSectionLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 v-if="this.edit === false" class="modal-title" id="addSectionLabel">New Section</h5>
-        <h5 v-else class="modal-title" id="addSectionLabel">Edit Section</h5>
+      <div class="modal-header typography">
+        <h3 v-if="this.edit === false" class="modal-title" id="addSectionLabel">New Section</h3>
+        <h3 v-else class="modal-title" id="addSectionLabel">Edit Section</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -16,17 +16,17 @@
         
     <form @submit.prevent="addSection" class="mb-3">
       <div class="form-group">
-        <input type="text" name="name"  class="form-control" placeholder="name" v-model="section.name">
+        <input type="text" name="name"  class="single-input" placeholder="name" v-model="section.name">
         <span class="warning" v-if="errors.name">{{ errors.name[0] }}</span>
       </div>
       <div class="form-group">
-        <textarea class="form-control" placeholder="Description" v-model="section.description"></textarea>
+        <textarea class="single-textarea" placeholder="Description" v-model="section.description"></textarea>
         <span class="warning" v-if="errors.description">{{ errors.description[0] }}</span>
       </div>
       <div class="modal-footer">
-        <button type="button" @click="clearForm()" data-dismiss="modal" class="btn btn-danger btn-block">Cancel</button>
-        <button v-if="this.edit == false" type="submit" class="btn btn-light btn-block">Add Section</button>
-        <button v-else type="submit" class="btn btn-light btn-block">Edit Section</button>
+        <button type="button" @click="clearForm()" data-dismiss="modal" class="genric-btn danger-border col-md-6">Cancel</button>
+        <button v-if="this.edit == false" type="submit" class="genric-btn info-border col-md-6">Add Section</button>
+        <button v-else type="submit" class="genric-btn info-border col-md-6">Edit Section</button>
       </div>
     </form>
       </div>
@@ -35,21 +35,25 @@
 </div>
 
     
-    
-      <ul v-for="section in sections" :key="section.id" class="list-group">
-        
-         <li class="list-group-item">{{ section.name }}
-           <button @click="editSection(section)" data-toggle="modal" data-target="#addSection" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-           <button @click="deleteSection(section.slug, key)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-           <button class="btn btn-primary"><a :href="course_slug+'/sections/'+section.slug">Show</a></button>
-
-         </li>
-        
-        
-      </ul>
+    <div class="progress-table-wrap">
+      <div class="progress-table">
+        <div class="table-head">
+          <div class="id">#</div>
+          <div class="course_name">Section Name</div>
+          <div class="operations">Operations</div>
+        </div>
+         <div class="table-row" v-for="section in sections" :key="section.id">
+            <div class="id">{{ section.id }}</div>
+            <div class="course_name">{{ section.name }}</div>
+            <div class="operations">
+              <button class="genric-btn info-border mr-2"><a :href="course_slug+'/sections/'+section.slug"><i class="ti-eye"></i></a></button>
+              <button @click="editSection(section)" data-toggle="modal" data-target="#addSection" class="genric-btn warning-border mr-2"><i class="ti-pencil-alt"></i></button>
+              <button @click="deleteSection(section.slug, key)" class="genric-btn danger-border mr-2"><i class="ti-trash"></i></button>
+            </div>
+        </div>
+      </div>
+    </div>
      
- 
-
   </div>
 </template>
 

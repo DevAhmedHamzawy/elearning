@@ -8,7 +8,8 @@ class Course extends Model
 {
     protected $guarded = [];
 
-    protected $with = ['sections','ratings','favourites'];
+    protected $with = ['sections','ratings','favourites','category','subcategory', 'user'];
+    protected $appends = ['video_path'];
 
     public function getRouteKeyName()
     {
@@ -17,8 +18,45 @@ class Course extends Model
 
     public static function activeCourses()
     {
-        return $this->whereVisible(1)->get();
+        return self::whereVisible(1)->get();
     }
+
+    public static function coursesByCategory($id)
+    {
+        return self::whereCategoryId($id)->get();
+    }
+
+    public static function coursesBySubCategory($id)
+    {
+        return self::whereCategoryId($id)->get();
+    }
+
+    public static function topThreeCourses()
+    {
+        return self::with(['ratings' => function ($q) {
+            $q->orderBy('rating', 'desc');
+        }])->take(3)->get();
+    }
+
+    public function getVideoPathAttribute(){
+        return asset('storage/courses/promos/' . $this->promo_video_url);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
+
+    public function subCategory()
+    {
+        return $this->belongsTo('App\Category');
+    }
+
 
     public function sections()
     {

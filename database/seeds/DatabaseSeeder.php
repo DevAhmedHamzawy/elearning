@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Admin;
 use App\Category;
+use App\Contact;
 use App\Course;
 use App\Lecture;
 use App\Rating;
@@ -29,5 +30,6 @@ class DatabaseSeeder extends Seeder
         //factory(Lecture::class, 60)->create();
         //factory(Rating::class, 60)->create();
         //factory(Widget::class, 5)->create();
+        //factory(Contact::class, 15)->create();
     }
 }
