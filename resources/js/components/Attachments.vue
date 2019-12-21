@@ -27,6 +27,7 @@ export default {
 
                 return axios.post(`${this.lecture_slug}/attachments`, form)
                 .then(({ data }) => {
+                    window.location.reload();
                     this.uploads = [
                         ...this.uploads,
                         data

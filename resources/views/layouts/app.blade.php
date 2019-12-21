@@ -31,8 +31,6 @@
 </head>
 <body>
     <div id="app">
-    
-
         <!--::header part start::-->
         <header class="main_menu home_menu">
             <div class="container">
@@ -56,7 +54,7 @@
                                         <a class="nav-link" href="{{ url('/about') }}">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ url('/course') }}">Courses</a>
+                                        <a class="nav-link" href="{{ route('courses.all') }}">Courses</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
@@ -81,6 +79,12 @@
                                                     </a>
 
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                        <a href="{{ url('profile/'.auth()->user()->user_name) }}" class="dropdown-item">
+                                                            profile
+                                                        </a>
+                                                        <a href="{{ route('home') }}" class="dropdown-item">
+                                                            Dashboard
+                                                        </a>
                                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                                         onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}
                                                         </a>
@@ -191,11 +195,17 @@ Copyright {{ now()->year }} All rights reserved | This template is made with <i 
             }
         } 
     </script>
-        <script src="{{ asset('js/app.js') }}"></script>
+    
+
+    @yield('scripts')
+
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- jquery plugins here-->
     <!-- jquery -->
-    <script src="{{ asset('js/jquery-1.12.1.min.js') }}"></script>
+    @if (\Request::is('/')) 
+        <script src="{{ asset('js/jquery-1.12.1.min.js') }}"></script>
+    @endif
     <!-- popper js -->
     <!-- bootstrap js -->
     <!-- easing js -->
@@ -219,6 +229,5 @@ Copyright {{ now()->year }} All rights reserved | This template is made with <i 
             selector: '.textarea'
         });
     </script>
-    @yield('scripts')
 </body>
 </html>

@@ -25,7 +25,7 @@ class CourseFormRequest extends FormRequest
     {
         return [
             'category_id' => 'required',
-            'name' => 'required|min:50|max:191|unique:courses,name,'.$this->id,
+            'name' => 'required|min:25|max:191|unique:courses,name,'.$this->id,
             'description' => 'required|min:50|max:65535',
             'visible' => 'boolean',
             'thumb' => 'required|image|mimes:jpeg,bmp,png,jpg',

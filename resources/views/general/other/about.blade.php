@@ -3,7 +3,7 @@
 @section('content')
 
   <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
+  <section class="breadcrumb breadcrumb_bg" style="background-image:url({{ url('img/main.png') }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -101,28 +101,22 @@
     <section class="member_counter">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-4 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter">1024</span>
-                        <h4>All Teachers</h4>
+                        <span class="counter">{{ $userscount }}</span>
+                        <h4>All Teachers & Students</h4>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-4 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter">960</span>
-                        <h4> All Students</h4>
+                        <span class="counter">{{ $coursescount }}</span>
+                        <h4>All Courses</h4>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-4 col-sm-12">
                     <div class="single_member_counter">
-                        <span class="counter">1020</span>
-                        <h4>Online Students</h4>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_member_counter">
-                        <span class="counter">820</span>
-                        <h4>Ofline Students</h4>
+                        <span class="counter">{{ $attachmentscount }}</span>
+                        <h4>All Attachments</h4>
                     </div>
                 </div>
             </div>

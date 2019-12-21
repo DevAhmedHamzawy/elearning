@@ -42,13 +42,13 @@
           <div class="course_name">Section Name</div>
           <div class="operations">Operations</div>
         </div>
-         <div class="table-row" v-for="section in sections" :key="section.id">
+         <div class="table-row" v-for="(section, index) in sections" :key="index">
             <div class="id">{{ section.id }}</div>
             <div class="course_name">{{ section.name }}</div>
             <div class="operations">
               <button class="genric-btn info-border mr-2"><a :href="course_slug+'/sections/'+section.slug"><i class="ti-eye"></i></a></button>
               <button @click="editSection(section)" data-toggle="modal" data-target="#addSection" class="genric-btn warning-border mr-2"><i class="ti-pencil-alt"></i></button>
-              <button @click="deleteSection(section.slug, key)" class="genric-btn danger-border mr-2"><i class="ti-trash"></i></button>
+              <button @click="deleteSection(section.slug, index)" class="genric-btn danger-border mr-2"><i class="ti-trash"></i></button>
             </div>
         </div>
       </div>

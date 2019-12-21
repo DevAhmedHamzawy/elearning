@@ -35,7 +35,7 @@
                 @foreach ($courses as $course)
                 <div class="col-sm-6 col-lg-4">
                         <div class="single_special_cource">
-                            <img src="{{ $course->thumbnail }}" class="special_img" alt="">
+                            <img src="{{ $course->img_path }}" class="special_img" alt="">
                             <div class="special_cource_text">
                                 <a href="course-details.html" class="btn_4">{{ $course->category->name }}</a>
                                 <h4>{{ $course->price }}$</h4>

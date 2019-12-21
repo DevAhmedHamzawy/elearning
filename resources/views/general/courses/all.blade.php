@@ -4,7 +4,7 @@
 
 
  <!-- breadcrumb start-->
- <section class="breadcrumb breadcrumb_bg">
+ <section class="breadcrumb breadcrumb_bg" style="background-image:url({{ url('img/main.png') }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -35,7 +35,7 @@
                 @foreach ($courses as $course)
                 <div class="col-sm-6 col-lg-4">
                         <div class="single_special_cource">
-                            <img src="{{ $course->thumbnail }}" class="special_img" alt="">
+                            <img src="{{ $course->img_path }}" class="special_img" alt="">
                             <div class="special_cource_text">
                                 <a href="course-details.html" class="btn_4">{{ $course->category->name }}</a>
                                 <h4>{{ $course->price }}$</h4>
@@ -67,5 +67,7 @@
         </div>
     </section>
     <!--::blog_part end::-->
+    <div style="margin: 10px 32%">{{ $courses->links() }}</div>
+
 
 @endsection

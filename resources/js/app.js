@@ -3,7 +3,11 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 require('./bootstrap');
 window.Vue = require('vue');
+window.events = new Vue();
+
+
 Vue.use(VueSweetalert2);
+
 
 window.noty = function(notification) {
     window.events.$emit('notification', notification)

@@ -2,7 +2,7 @@
 
 @section('content')
      <!-- breadcrumb start-->
-     <section class="breadcrumb breadcrumb_bg">
+     <section class="breadcrumb breadcrumb_bg" style="background-image:url({{ url('img/main.png') }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -23,7 +23,7 @@
     <div class="container">
       <div class="d-none d-sm-block mb-5 pb-4">
         <div id="map" style="height: 480px;"></div>
-        <script defer>
+        <script type="application/javascript">
           function initMap() {
             var uluru = {lat: -25.363, lng: 131.044};
             var grayStyles = [
@@ -45,7 +45,7 @@
           }
           
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>
+        <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqET1nIDZzMGEieGANkEF_xB1RSCkJTjk&callback=initMap"></script>
         
       </div>
 

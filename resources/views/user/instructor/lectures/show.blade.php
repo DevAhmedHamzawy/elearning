@@ -42,7 +42,7 @@
                         </li>
                     </ul>
 
-                    <attachments course_slug="{{ $course->slug }}" section_slug="{{ $section->slug }}" lecture_slug="{{ $lecture->slug }}"  inline-template>
+                    {{--<attachments course_slug="{{ $course->slug }}" section_slug="{{ $section->slug }}" lecture_slug="{{ $lecture->slug }}"  inline-template>
                             <div>
                                 <h2 class="text-center" onclick="document.getElementById('file-upload').click()">
                                     <i class="ti-clip"></i>
@@ -63,7 +63,7 @@
 
                                 </ul>
                             </div>
-                    </attachments>
+                    </attachments>--}}
                 </div>
             </div>
         </div>

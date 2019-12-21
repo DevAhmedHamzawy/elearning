@@ -1872,6 +1872,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         form.append('name', attachment.name);
         return axios.post("".concat(_this.lecture_slug, "/attachments"), form).then(function (_ref) {
           var data = _ref.data;
+          window.location.reload();
           _this.uploads = [].concat(_toConsumableArray(_this.uploads), [data]);
         });
       });
@@ -2045,6 +2046,7 @@ __webpack_require__.r(__webpack_exports__);
         message: 'Lecture created successfully',
         type: 'success'
       });
+      alert('lecture Added Successfully');
 
       _this.lectures.push(lecture);
     });
@@ -2053,12 +2055,14 @@ __webpack_require__.r(__webpack_exports__);
         return lecture.id == l.id;
       });
 
-      _this.lectures.splice(lectureIndex, 1, lecture);
-      /*window.noty({
-      	message: 'Lecture updated successfully',
-      	type: 'success'
-      })*/
+      alert('lecture Updated Successfully');
 
+      _this.lectures.splice(lectureIndex, 1, lecture);
+
+      window.noty({
+        message: 'Lecture updated successfully',
+        type: 'success'
+      });
     });
   },
   components: {
@@ -2082,10 +2086,13 @@ __webpack_require__.r(__webpack_exports__);
     deleteLecture: function deleteLecture(slug, key) {
       var _this2 = this;
 
+      console.log(key);
+
       if (confirm('Are you sure you wanna delete ?')) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/courses/".concat(this.course_slug, "/sections/").concat(this.section_slug, "/lectures/").concat(slug)).then(function (resp) {
           _this2.lectures.splice(key, 1);
 
+          alert('lecture Deleted Successfully');
           window.noty({
             message: 'Lecture deleted successfully',
             type: 'success'
@@ -2418,10 +2425,9 @@ __webpack_require__.r(__webpack_exports__);
 
           alert('A New Rating Was Added');
           $('#addRating').modal('hide');
-          $('.modal-backdrop').remove();
+          $('.modal-backdrop').remove(); //this.ratings.push(res.data);
 
-          _this.ratings.push(res.data);
-
+          window.location.reload();
           _this.errors = [];
         })["catch"](function (err) {
           //window.handleErrors(error)
@@ -42883,11 +42889,11 @@ var render = function() {
         _c(
           "ul",
           { staticClass: "list-group d-flex" },
-          _vm._l(_vm.lectures, function(lecture) {
+          _vm._l(_vm.lectures, function(lecture, index) {
             return _c(
               "li",
               {
-                key: lecture.id,
+                key: index,
                 staticClass: "list-group-item d-flex justify-content-between"
               },
               [
@@ -42925,7 +42931,7 @@ var render = function() {
                       staticClass: "genric-btn danger-border",
                       on: {
                         click: function($event) {
-                          return _vm.deleteLecture(lecture.slug, _vm.key)
+                          return _vm.deleteLecture(lecture.slug, index)
                         }
                       }
                     },
@@ -43567,8 +43573,8 @@ var render = function() {
         [
           _vm._m(1),
           _vm._v(" "),
-          _vm._l(_vm.sections, function(section) {
-            return _c("div", { key: section.id, staticClass: "table-row" }, [
+          _vm._l(_vm.sections, function(section, index) {
+            return _c("div", { key: index, staticClass: "table-row" }, [
               _c("div", { staticClass: "id" }, [_vm._v(_vm._s(section.id))]),
               _vm._v(" "),
               _c("div", { staticClass: "course_name" }, [
@@ -43611,7 +43617,7 @@ var render = function() {
                     staticClass: "genric-btn danger-border mr-2",
                     on: {
                       click: function($event) {
-                        return _vm.deleteSection(section.slug, _vm.key)
+                        return _vm.deleteSection(section.slug, index)
                       }
                     }
                   },
@@ -56253,6 +56259,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.events = new Vue();
 Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 window.noty = function (notification) {

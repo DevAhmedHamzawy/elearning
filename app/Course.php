@@ -38,8 +38,29 @@ class Course extends Model
         }])->take(3)->get();
     }
 
-    public function getVideoPathAttribute(){
+
+    public static function bestRatingCourses()
+    {
+        return self::with(['ratings' => function ($q) {
+            $q->where('rating', '>', 3);
+        }])->get();
+    }
+
+    public static function worstRatingCourses()
+    {
+        return self::with(['ratings' => function ($q) {
+            $q->where('rating', '<', 3);
+        }])->get();
+    }
+
+    public function getVideoPathAttribute()
+    {
         return asset('storage/courses/promos/' . $this->promo_video_url);
+    }
+
+    public function getimgPathAttribute()
+    {
+        return asset('storage/courses/images/' . $this->thumbnail);
     }
 
     public function user()

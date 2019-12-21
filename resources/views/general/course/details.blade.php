@@ -3,7 +3,7 @@
 @section('content')
 
  <!-- breadcrumb start-->
- <section class="breadcrumb breadcrumb_bg" style="background-image:url({{ url($course->thumbnail) }})">
+ <section class="breadcrumb breadcrumb_bg" style="background-image:url({{ url($course->img_path) }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -52,12 +52,21 @@
                         <h4 class="title">Course Outline</h4>
                         <div class="content">
                             <ul class="course_list">
-                                @foreach ($course->sections as $section)
+                                @forelse ($course->sections as $section)
                                     <li class="justify-content-between align-items-center d-flex">
-                                        <p>{{ $section->name }}</p>
-                                        <a class="btn_2 text-uppercase" href="#">View Details</a>
-                                    </li>     
-                                @endforeach
+                                        <h1>{{ $section->name }}</h1>
+                                        {{--<a class="btn_2 text-uppercase" href="#">View Details</a>--}}
+                                    </li>
+                                @forelse ($section->lectures as $lecture)
+                                    <li class="justify-content-between align-items-center d-flex">
+                                        <p>{{ $lecture->name }}</p>
+                                    </li>
+                                @empty
+                                    No Content For This Section
+                                @endforelse    
+                                @empty   
+                                    No Content On This Course      
+                                @endforelse
                             </ul>
                         </div>
                     </div>
@@ -101,21 +110,22 @@
                         </ul>
                         <a href="{{ route('course.learning' , $course->slug) }}" class="btn_1 d-block">Enroll the course</a>
                     </div>
-
-                    <h4 class="title">Reviews</h4>
-                    <div class="content">
-                        <div class="feedeback row">
-                            <div class="mt-10 col-md-8">
-                                <a href="#" class="btn_1" data-toggle="modal" data-target="#addRating">Edit Your Feedback</a>
+                    @auth
+                        <h4 class="title">Reviews</h4>
+                        <div class="content">
+                            <div class="feedeback row">
+                                <div class="mt-10 col-md-12">
+                                    <a href="#" class="btn_1" data-toggle="modal" data-target="#addRating">Add Your Feedback</a>
+                                </div>
+                                {{--<div class="mt-10">
+                                    <favourites :course="{{ $course }}" course_slug="{{ $course->slug }}"  course_id="{{ $course->id }}" :initial-favourites="{{ $course->favourites }}" />
+                                </div>--}}
                             </div>
-                            <div class="mt-10">
-                                <favourites :course="{{ $course }}" course_slug="{{ $course->slug }}"  course_id="{{ $course->id }}" :initial-favourites="{{ $course->favourites }}" />
+                            <div class="comments-area mb-30">
+                                <ratingstwo course_slug="{{ $course->slug }}" total_course_ratings="{{ round($course->ratings->avg('rating'),1) }}" course_ratings="{{ $course->ratings }}" auth_user_id={{ auth()->user()->id }}></ratingstwo>
                             </div>
                         </div>
-                        <div class="comments-area mb-30">
-                            <ratingstwo course_slug="{{ $course->slug }}" total_course_ratings="{{ round($course->ratings->avg('rating'),1) }}" course_ratings="{{ $course->ratings }}" auth_user_id={{ auth()->user()->id }}></ratingstwo>
-                        </div>
-                    </div>
+                    @endauth
                 </div>
             </div>
         </div>

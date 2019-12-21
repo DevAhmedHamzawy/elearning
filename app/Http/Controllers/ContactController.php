@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-   
-
     /**
      * Store a newly created resource in storage.
      *
@@ -20,8 +18,4 @@ class ContactController extends Controller
         Contact::create($request->all());
         return redirect()->back()->withStatus('Contact Created Successfully');
     }
-
-    
-
-    
 }

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('public/css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('adminpanel/css/login.css') }}">
 
 <!-- Main -->
 <div class="d-md-flex h-md-100 align-items-center">
@@ -45,10 +45,3 @@
         
     </div>
     <!-- End Main -->
-
-
-                       
-
-                               
-
-

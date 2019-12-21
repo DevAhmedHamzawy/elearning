@@ -7,7 +7,6 @@
             <div class="card">
                 <div class="card-header">
                     Dashboard
-                    <a href="{{ route('categories.create') }}" class="btn btn-primary" style="float:right">Create Category</a>
                 </div>
 
                 <div class="card-body">
@@ -22,31 +21,23 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">Email Address</th>
                                 <th scope="col">Operations</th>
                             </tr>
                         </thead>
-                        @forelse ($categories as $category)
+                        @forelse ($newsletterMembers['members'] as $newsletterMember)
                         <tbody>
                             <tr>
                                 <td scope="row">#</td>
-                                <td>{{ $category->name }}</td>
-                                <td>{{ $category->description }}</td>
+                                <td>{{ $newsletterMember['email_address'] }}</td>
                                 <td>
-                                    <a href="{{ route('subcategories.index', $category->slug) }}" class="btn btn-primary">Show</a>
-                                    <a href="{{ route('categories.edit', $category->slug) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('categories.destroy', $category->slug) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
-                                    </form>
+                                    {{--<a href="{{ route('subnewsletterMembers.index', $newsletterMember->slug) }}" class="btn btn-primary">Show</a>--}}
                                 </td>
                             </tr>
                         </tbody>
                         @empty
                             <li class="list-group-item">
-                                No categories Added
+                                No One Subscribed In The Newsletter
                             </li>
                         @endforelse
                     </table>

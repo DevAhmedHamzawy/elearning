@@ -92,7 +92,8 @@ export default {
             alert('A New Rating Was Added');
             $('#addRating').modal('hide');
             $('.modal-backdrop').remove();
-            this.ratings.push(res.data);
+            //this.ratings.push(res.data);
+            window.location.reload();
             this.errors = [];
 
         }).catch(err => {

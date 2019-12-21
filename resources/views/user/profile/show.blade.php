@@ -112,7 +112,8 @@ $subscription = auth()->user()->subscriptions->first();
             
             <div class="tab-pane fade show active" id="home-2">
                 <form action="{{ route('profile.update', $user->id)  }}" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+                        @method('put')
+                        @csrf
                         <div class="form-group">
                             <input class="form-control form-control-lg" type="text" name="user_name" placeholder="{{ $user->user_name }}">
                         </div>

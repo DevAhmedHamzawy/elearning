@@ -8,4 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable
 {
     protected $guarded = [];
+
+    public function getRouteKeyName()
+    {
+        return 'user_name';
+    }
 }

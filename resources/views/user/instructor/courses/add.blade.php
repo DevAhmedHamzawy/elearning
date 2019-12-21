@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- breadcrumb start-->
-<section class="breadcrumb breadcrumb_bg">
+<section class="breadcrumb breadcrumb_bg" style="background-image:url({{ url('img/main.png') }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -18,16 +18,22 @@
 </section>
 <!-- breadcrumb start-->
 <br><br>
+
+
+@if($errors->any())
+
+@foreach($errors->all() as $error)
+<div class="alert alert-danger" role="alert">
+    {{ $error }}
+</div>
+
+@endforeach
+@endif
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                
-                @if($errors->any())
-                    @foreach($errors as $error)
-                        {{ $error }}
-                    @endforeach
-                @endif
 
                 <div class="card-header">{{ __('Add New Course') }}</div>
 

@@ -26,6 +26,8 @@ Route::group(['prefix' => '/admin','middleware' => 'assign.guard:admin,admin/log
     Route::resource('users', 'UsersController');
     Route::resource('admins', 'AdminsController');
     Route::resource('settings', 'SettingController');
+    Route::resource('contacts', 'ManagingContactController');
+    Route::resource('newsletter', 'ManagingNewsletterController');
     Route::resource('widgets', 'WidgetController');
 
 
@@ -53,14 +55,15 @@ Route::get('profile/{user}', 'ProfileController@show');
 Route::post('/card/update', 'SubscriptionController@updateCard');
 Route::post('/subscribe', 'SubscriptionController@subscribe');    
 Route::post('/subscription/change', 'SubscriptionController@change')->name('subscriptions.change');        
-Route::get('/subscribe', 'SubscriptionController@showSubscriptionForm');
+Route::get('/subscribe', 'SubscriptionController@showSubscriptionForm')->name('subscribe');
 
 Route::get('/watch-course/info/{course}', 'WatchCourseController@info')->name('course.info');
 Route::get('/watch-course/{course}', 'WatchCourseController@index')->name('course.learning');
 Route::post('/course/complete-lecture/{lecture}', 'WatchCourseController@completeLecture');
 Route::get('/course/{course}/lecture/{lecture}', 'WatchCourseController@showLecture')->name('course.watch');
+});
 
-Route::get('courses', 'PublicController@courses')->name('courses.all');
+Route::get('all-courses', 'PublicController@courses')->name('courses.all');
 Route::get('category/{category}', 'PublicController@courseByCategory')->name('category.courses');
 Route::get('sub-category/{subcategory}', 'PublicController@courseBySubCategory')->name('subcategory.courses');
 Route::get('course/{course}', 'PublicController@courseDetails')->name('course.details');
@@ -69,6 +72,3 @@ Route::get('contact', 'PublicController@contact')->name('contact');
 Route::resource('contacts', 'ContactController', ['only' => ['store']]);
 Route::post('newsletter', 'NewsletterController@subscribe')->name('newsletter.subscribe');
 Route::get('newslettermembers', 'NewsletterController@getMembers')->name('newsletter.members');
-
-
-});

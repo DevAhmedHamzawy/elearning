@@ -7315,3 +7315,14 @@ h1, h2, h3, h4, h5, h6 {
   color: #ff663b;
 }
 #file-upload{ display:none; }
+.modal {
+  position: fixed;
+  top: 119px;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+}

@@ -7,7 +7,7 @@
 		</h1>
 		<div class="">
 			<ul class="list-group d-flex">
-				<li class="list-group-item d-flex justify-content-between" v-for="lecture in lectures" :key="lecture.id">
+				<li class="list-group-item d-flex justify-content-between" v-for="(lecture, index) in lectures" :key="index">
 					<p>{{ lecture.name }}</p> 
 					<p>
 						<button class="genric-btn info-border"><a :href="section_slug+'/lectures/'+lecture.slug">
@@ -16,7 +16,7 @@
 						<button class="genric-btn warning-border" @click="editLecture(lecture)">
 							<i class="ti-pencil-alt"></i>
 						</button>
-						<button class="genric-btn danger-border" @click="deleteLecture(lecture.slug, key)">
+						<button class="genric-btn danger-border" @click="deleteLecture(lecture.slug, index)">
 							<i class="ti-trash"></i>
 						</button>
 					</p>
@@ -38,6 +38,7 @@
 					message: 'Lecture created successfully',
 					type: 'success'
 				})
+				alert('lecture Added Successfully');
 				this.lectures.push(lecture)
 			})
 
@@ -45,12 +46,13 @@
 				let lectureIndex = this.lectures.findIndex(l => {
 					return lecture.id == l.id 
 				})
-				
+				alert('lecture Updated Successfully');
+
 				this.lectures.splice(lectureIndex, 1, lecture)
-				/*window.noty({
+				window.noty({
 					message: 'Lecture updated successfully',
 					type: 'success'
-				})*/
+				})
 			})
 		},
 		components: {
@@ -72,10 +74,13 @@
 				this.$emit('create_new_lecture', { courseSlug, sectionSlug })
 			},
 			deleteLecture(slug, key) {
+				console.log(key);
 				if(confirm('Are you sure you wanna delete ?')) {
 					Axios.delete(`/courses/${this.course_slug}/sections/${this.section_slug}/lectures/${slug}`)
 						 .then(resp => {
-						 	this.lectures.splice(key, 1)
+							 this.lectures.splice(key, 1)
+							 alert('lecture Deleted Successfully');
+
 						 	window.noty({
 								message: 'Lecture deleted successfully',
 								type: 'success'

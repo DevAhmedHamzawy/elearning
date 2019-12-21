@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     Dashboard
@@ -17,26 +17,41 @@
                         </div>
                     @endif
 
-                    <ul class="list-group">
-                        @forelse ($admins as $admin)
-                            <li class="list-group-item">
-                                {{ $admin->user_name }}
-                                
-                                <a href="{{ route('admins.show', $admin->id) }}" class="btn btn-primary">Show</a>
-                                <a href="{{ route('admins.edit', $admin->id) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('admins.destroy', $admin->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">Delete</button>
-                                </form>
-                                
-                            </li>
-                        @empty
-                            <li class="list-group-item">
-                                No admins Added
-                            </li>
-                        @endforelse
-                    </ul>
+
+                    <table class="table table-striped table-dark">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Operations</th>
+                                </tr>
+                            </thead>
+                            @forelse ($admins as $admin)
+                            <tbody>
+                                <tr>
+                                    <td scope="row">#</td>
+                                    <td>{{ $admin->user_name }}</td>
+                                    <td>{{ $admin->img }}</td>
+                                    <td>
+                                        <a href="{{ route('admins.show', $admin->user_name) }}" class="btn btn-primary">Show</a>
+                                        <a href="{{ route('admins.edit', $admin->user_name) }}" class="btn btn-warning">Edit</a>
+                                        <form action="{{ route('admins.destroy', $admin->user_name) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @empty
+                                <li class="list-group-item">
+                                    No admins Added
+                                </li>
+                            @endforelse
+                        </table>
+                       
                 </div>
             </div>
         </div>

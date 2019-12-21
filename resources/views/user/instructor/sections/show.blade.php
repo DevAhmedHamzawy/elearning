@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- breadcrumb start-->
-<section class="breadcrumb breadcrumb_bg">
+<section class="breadcrumb breadcrumb_bg" style="background-image:url({{ url('img/main.png') }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -47,4 +47,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection
