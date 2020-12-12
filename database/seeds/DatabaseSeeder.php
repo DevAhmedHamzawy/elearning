@@ -22,14 +22,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //$this->call(UsersTableSeeder::class);
-        //factory(User::class,10)->create();
-        //factory(Admin::class,10)->create();
-        //factory(Category::class,10)->create();
-        //factory(Course::class, 30)->create();
-        //factory(Section::class, 60)->create();
-        //factory(Lecture::class, 60)->create();
-        //factory(Rating::class, 60)->create();
-        //factory(Widget::class, 5)->create();
-        //factory(Contact::class, 15)->create();
+        factory(User::class,10)->create();
+        factory(Admin::class,10)->create();
+        factory(Category::class,10)->create();
+        factory(Course::class, 30)->create();
+        factory(Section::class, 60)->create();
+        factory(Lecture::class, 60)->create();
+        factory(Rating::class, 60)->create();
+        factory(Widget::class, 5)->create();
+        factory(Contact::class, 15)->create();
     }
 }
