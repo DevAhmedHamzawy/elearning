@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entities;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 use App\Lecture;
 use App\Course;
 

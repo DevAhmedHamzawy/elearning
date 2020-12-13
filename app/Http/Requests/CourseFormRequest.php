@@ -28,7 +28,7 @@ class CourseFormRequest extends FormRequest
             'name' => 'required|min:25|max:191|unique:courses,name,'.$this->id,
             'description' => 'required|min:50|max:65535',
             'visible' => 'boolean',
-            'thumb' => 'required|image|mimes:jpeg,bmp,png,jpg',
+            'thumb' => 'required|mimes:jpeg,bmp,png,jpg',
             'price' => 'required|numeric',
             'language' => 'required|string',
             'faq' => 'required|min:50|max:4294977295',

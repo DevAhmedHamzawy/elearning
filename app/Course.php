@@ -60,7 +60,11 @@ class Course extends Model
 
     public function getimgPathAttribute()
     {
-        return asset('storage/courses/images/' . $this->thumbnail);
+        if(file_exists(public_path() .'/storage/courses/images/' . $this->thumbnail)){
+            return asset('storage/courses/images/' . $this->thumbnail);
+        }else{
+            return asset('storage/random_pics/' . rand(1,22) . '.jpg');
+        }
     }
 
     public function user()
@@ -102,6 +106,33 @@ class Course extends Model
     public function getOrderedLectures(){
         return $this->lectures->sortBy('episode_number');
     }
+
+    //Count Posts By Month
+    public Static function FindCoursesByMonth($categoryName, $monthNumber)
+    {   
+        //$category = Category::whereName($categoryName)->first();
+        //return Self::whereYear('created_at' , Carbon::now()->year)->whereMonth('created_at' , $monthNumber)->whereCategoryId($category->id)->count();
+        //return self::whereYear('created_at' , Carbon::now()->year)->whereMonth('created_at' , $monthNumber)->get();
+        return rand(0,50);
+    }
+
+
+    //Count Categories
+    public static function CountCategories()
+    {
+        $categories = Category::limit(10)->get();
+        $countCategories = [];
+        
+        foreach($categories as $key => $value)
+        {
+            $key = $value->name;
+            $countCategories[$key] = [];
+            $countCategories[$key] = $value->courses()->count();
+        }
+ 
+        return $countCategories;
+    }
+
 
     public function delete(){
 

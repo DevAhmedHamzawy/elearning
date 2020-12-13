@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
 
-        <a class="navbar-brand" href="#"><img src="{{ asset('public/images/main/logo.png') }}" width="150" height="30" /></a>
+        <a class="navbar-brand" href="#">{{--<img src="{{ asset('public/images/main/logo.png') }}" width="150" height="30" />--}}glearning</a>
 
 
         <button class="navbar-toggler sideMenuToggler" type="button">

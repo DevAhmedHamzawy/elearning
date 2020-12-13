@@ -42,10 +42,10 @@
                                 <a href="{{ route('course.details', $course->slug) }}">
                                     <h3>{{ $course->name }}</h3>
                                 </a>
-                                <p>{{ $course->description }}</p>
+                                <p>{!! str_limit($course->description, 300) !!}</p>
                                 <div class="author_info">
                                     <div class="author_img">
-                                        <img src="{{ $course->user->img }}" width="50" height="50">
+                                        <img src="{{ $course->user->img_path }}" width="50" height="50">
                                         <div class="author_info_text">
                                             <p>Conduct by:</p>
                                             <h5><a href="#">{{ $course->user->user_name }}</a></h5>

@@ -115,16 +115,16 @@ $subscription = auth()->user()->subscriptions->first();
                         @method('put')
                         @csrf
                         <div class="form-group">
-                            <input class="form-control form-control-lg" type="text" name="user_name" placeholder="{{ $user->user_name }}">
+                            <input class="form-control form-control-lg" type="text" name="user_name" value="{{ $user->user_name }}" placeholder="{{ $user->user_name }}">
                         </div>
                         <div class="form-group">
-                            <input class="form-control form-control-lg" type="text" name="first_name" placeholder="{{ $user->first_name }}">
+                            <input class="form-control form-control-lg" type="text" name="first_name" value="{{ $user->first_name }}" placeholder="{{ $user->first_name }}">
                         </div>
                         <div class="form-group">
-                            <input class="form-control form-control-lg" type="text" name="last_name" placeholder="{{ $user->last_name }}">
+                            <input class="form-control form-control-lg" type="text" name="last_name" value="{{ $user->last_name }}" placeholder="{{ $user->last_name }}">
                         </div>
                         <div class="form-group">
-                            <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror textarea" cols="30" rows="10" required autocompleted="description">{{ $user->description }}</textarea>
+                            <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror textarea" cols="30" rows="10">{{ $user->description }}</textarea>
                         </div>
 
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>

@@ -72,4 +72,10 @@ class User extends Authenticatable implements MustVerifyEmail
         // Afterwards Delete The Course
         return parent::delete();
     }
+
+
+    public function getimgPathAttribute()
+    { 
+        return asset('storage/random_pics/' . rand(1,22) . '.jpg');   
+    }
 }
